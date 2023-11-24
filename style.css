@@ -1,0 +1,10 @@
+#prova {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+div {
+  flex: 1;
+  padding: 1rem 2rem;
+}
