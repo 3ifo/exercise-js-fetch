@@ -1,0 +1,26 @@
+.cardss {
+  border: 2px solid red;
+  padding: 1rem;
+  background-color: antiquewhite;
+}
+.cardss > h4 {
+  font-size: 1.2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+}
+
+.cardss > p {
+  font-size: 1rem;
+}
+
+#div2 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+  width: 20%;
+}
+
+h5 {
+  font-size: 1rem;
+}

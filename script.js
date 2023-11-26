@@ -35,7 +35,7 @@ const creazionePostCards = (post) => {
 /*# Esercizio 2 - Barzellette
 Studiati come funzionano le API di https://v2.jokeapi.dev/.
 Crea una pagina HTML in cui l’utente può decidere quante barzellette visualizzare. Dopo che l’utente ha deciso e dato conferma d’invio (con un bottone), 
-interroga l’API e crea una lista di barzellette che contiene tante barzellette (a tema Programming) quante ne ha richieste l’utente.*/
+interroga l’API e crea una lista di barzellette che contiene tante barzellette (a tema Programming) quante ne ha richieste l’utente.
 
 const h3 = document.querySelector("h3");
 const input = document.querySelector("input");
@@ -75,5 +75,56 @@ const creazioneBarzellette = (barzelletta) => {
     li.innerText = "Barzelletta errore";
   }
   div.appendChild(li);
+  return div;
+};*/
+
+/* # Esercizio 3 - Ricerca paesi per lingua
+Studiati come funzionano le API di https://restcountries.com/.
+Crea una pagina HTML in cui l’utente può inserire del testo ed effettuare una ricerca di paesi a partire dalla lingua. 
+Dopo che l’utente ha scritto del testo e dato conferma d’invio (con un bottone), interroga l’API e crea una lista di cards, di cui ciascuna card è un risultato della ricerca. 
+Ogni card rappresenta un paese cercato a partire dalla stringa inserita dall’utente (una lingua parlata nel paese).*/
+
+const div2 = document.getElementById("div2");
+const input = document.querySelector("input");
+const button = document.querySelector("button");
+
+window.addEventListener("load", function () {
+  button.addEventListener("click", async function () {
+    const linguaParlata = input.value;
+    const questiPaesi = document.createElement("h5");
+    questiPaesi.innerText = "La seguente lingua si parla in questi paesi:";
+    div2.appendChild(questiPaesi);
+
+    try {
+      const response = await fetch(
+        `https://restcountries.com/v3.1/lang/${linguaParlata}`
+      );
+      const obj = await response.json();
+      obj.forEach((nazione) => {
+        console.log(obj);
+        const card = creaCard(nazione);
+        div2.appendChild(card);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  });
+});
+
+//Creazione card
+
+const creaCard = (lang) => {
+  const div = document.createElement("div");
+  div.classList.add("cardss");
+  const h4 = document.createElement("h4");
+  const p = document.createElement("p");
+  if (typeof lang.languages === "object") {
+    const lingueArray = Object.values(lang.languages);
+    p.innerText = `La lingua ufficiale è: ${lingueArray}`;
+  }
+
+  h4.innerText = `${lang.name.common}`;
+  div.appendChild(h4);
+  div.appendChild(p);
   return div;
 };
